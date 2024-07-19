@@ -1,7 +1,7 @@
 FROM ubuntu
 RUN apt-get update
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN echo "tzdata tzdata/Areas select America" | debconf-set-selections && echo "tzdata tzdata/Zones/America select Los_Angeles" | debconf-set-selections
 
@@ -22,13 +22,13 @@ RUN curl -sSLO https://pdm-project.org/install-pdm.py \
     && echo 'export PATH=/root/.local/bin:$PATH' >> ~/.bashrc \
     && echo "Installed pdm"
 
-RUN git clone https://github.com/r2e-project/r2e-docker-setup.git /install_code
+RUN git clone https://github.com/berkeleyljj/install_code.git /install_code
 
-COPY . /repos
+COPY . /dreamoftheredchamber_leetcode
 
 WORKDIR /install_code
 
 RUN pip install -r requirements.txt
 
-RUN python3 parallel_installer.py 0 10 10
+RUN python3 one_on_one_installer.py dreamoftheredchamber_leetcode
 

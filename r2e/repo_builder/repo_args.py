@@ -23,6 +23,10 @@ class RepoArgs(BaseModel):
         16,
         description="Number of processes to use for cloning the repositories",
     )
+    repo_name: str | None = Field(
+        None,
+        description="Name of the repo to setup"
+    )
 
     ## pycg args
     run_pycg: bool = Field(

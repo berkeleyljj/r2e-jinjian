@@ -45,14 +45,14 @@ class SetupRepos:
                 ), f"Expected list of strings, got {repo_urls}"
             SetupRepos.clone_repos_from_urls(repo_urls, repo_args.cloning_multiprocess)
 
-        #run_pycg(repo_args)
+        run_pycg(repo_args)
 
     @staticmethod
     def clone_repo_from_url(repo_url: str):
         repo_username, repo_name = (
             repo_url.rstrip("/").removesuffix(".git").split("/")[-2:]
         )
-        local_repo_clone_path = REPOS_DIR / f"{repo_username}___{repo_name}"
+        local_repo_clone_path = REPOS_DIR / f"{repo_username}_{repo_name}"
 
         if os.path.exists(local_repo_clone_path):
             print(
@@ -69,7 +69,7 @@ class SetupRepos:
         local_repo_path = str(Path(local_repo_path).resolve())
 
         local_repo_name = local_repo_path.split("/")[-1]
-        local_repo_clone_path = REPOS_DIR / f"LOCAL___{local_repo_name}"
+        local_repo_clone_path = REPOS_DIR / f"LOCAL_{local_repo_name}"
 
         if os.path.exists(local_repo_clone_path):
             print(
